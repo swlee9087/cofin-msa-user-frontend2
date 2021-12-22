@@ -4,15 +4,14 @@ import {UserLogin,UserLost,UserJoin} from 'user'
 
 export default function LoginPage(){
     return(
-        <div>
-            <text align="center"><h1><b>로그인</b></h1></text>
+        <div align="center" style={{ display: "inline-block" }}>
+            <ul type='none'>
+            <li></li>
             <br/><br/>
-            <UserLogin/>
+            <li><UserLogin/></li>
             <br/><br/>
-            <UserLost/>
-            <br/><br/>
-            <UserJoin/>
-            <br/><br/>
+            <li><a href="/join">회원 가입</a></li>
+            <br/><br/></ul>
         </div>
     )
 }

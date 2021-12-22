@@ -8,7 +8,7 @@ import MsgPage from "./message/pages/MsgPage"
 // import NewsPage from "./news/NewsPage"
 import NewsPage from "./news/pages/NewsPage"
 import LoginPage from "./user/pages/LoginPage"
-import { Unregister,UserJoin,UserPage, UserLogin, UserLost, UserInfo } from 'user';
+import { Unregister, UserInfo, UserJoin, UserLogin, UserLost, UserPage } from 'user';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <Route path='/medpt' element={<MedptPage/>}/>
       <Route path='/msg' element={<MsgPage/>}/>
       <Route path='/news' element={<NewsPage/>}/>
-      //user
+
       <Route path='/loginpg' element={<LoginPage/>}/>
       <Route path='/userpg' element={<UserPage/>}/>
 

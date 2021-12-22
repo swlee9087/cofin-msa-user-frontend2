@@ -1,5 +1,4 @@
 import React from 'react'
-import { LoginPage,UserPage } from 'user';
 import SearchBox from './SearchBox';
 
 export default function Navigation(){
@@ -7,14 +6,20 @@ export default function Navigation(){
         <div>
             <ul id='nav' type='none'>
                 <li><a href="/medpts">medpt</a></li>
-                <li><a href="/message">message</a></li>
+                <li><a href="/msg">message</a></li>
                 <li><a href="/news">news</a></li>
-                <li><a href="/user">user</a></li>
+                <li><br /><br /></li>
+                <li><a href="/loginpg">login page</a></li>
+                <li><a href="/userpg">user page</a></li>
+                <li><br /><br /></li>
+                <li><a href="/login">login component</a></li>
+                <li><a href="/join">join component</a></li>
+                <li><a href="/lost">lost component</a></li>
+                <li><a href="/userinfo">user info component</a></li>
+                <li><a href="/unregis">unregister component</a></li>
                 <li><br /><br /></li>
                 <li><SearchBox/></li>
                 <li><br /><br /></li>
-                {/* <li><LoginPage/></li>
-                <li><UserPage/></li> */}
             </ul>
         </div>
     );  

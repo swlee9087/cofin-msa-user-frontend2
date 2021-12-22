@@ -22,7 +22,6 @@ export default function RegisterForm() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-
   const SERVER='http://127.0.0.1:8000/api/user/join'
 
   const{user_email, username, password, 
@@ -64,41 +63,23 @@ export default function RegisterForm() {
     }
   });
 
+  // const handleChange = e => {
+  //   console.log(e.target.name);
+  //   setSignup({ ...signup, [e.target.name]: e.target.value });
+  //   console.log(signup);
+  // };
+
+
   
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
 
   return (
+    <div align="center" style={{ display: "inline-block" }}>
+      <h1><b>회원 가입</b></h1>
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
-        <TextField
-              fullWidth
-              autoComplete="user_email"
-              type="email"
-              label="메일주소"
-              {...getFieldProps('user_email')}
-              error={Boolean(touched.user_email && errors.user_email)}
-              helperText={touched.user_email && errors.user_email}
-            />
-            <TextField
-              fullWidth
-              autoComplete="current-password"
-              type={showPassword ? 'text' : 'password'}
-              label="비밀번호"
-              {...getFieldProps('password')}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
-                      <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }}
-              error={Boolean(touched.password && errors.password)}
-              helperText={touched.password && errors.password}
-            />
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
               <TextField
                 fullWidth
                 label="이름"
@@ -120,11 +101,59 @@ export default function RegisterForm() {
                 {...getFieldProps('user_sex')}
                 error={Boolean(touched.user_sex && errors.user_sex)}
                 helperText={touched.user_sex && errors.user_sex}
+                // 성별은 radio? 
               /></Stack>
+        <TextField
+              fullWidth
+              autoComplete="user_email"
+              type="email"
+              label="이메일=로그인 아이디"
+              {...getFieldProps('user_email')}
+              error={Boolean(touched.user_email && errors.user_email)}
+              helperText={touched.user_email && errors.user_email}
+            />
+            <TextField
+              fullWidth
+              autoComplete="current-password"
+              type={showPassword ? 'text' : 'password'}
+              label="6~12자리 비밀번호"
+              {...getFieldProps('password')}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                      <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+              error={Boolean(touched.password && errors.password)}
+              helperText={touched.password && errors.password}
+            />
+            <TextField
+              fullWidth
+              autoComplete="current-password"
+              type={showPassword ? 'text' : 'password'}
+              label="비밀번호 확인"
+              {...getFieldProps('password')}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                      <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+              error={Boolean(touched.password && errors.password)}
+              helperText={touched.password && errors.password}
+              // 확인!!
+            />
+            
               
               <TextField
                 fullWidth
-                label="연락처"
+                label="010-0000-0000"
                 {...getFieldProps('user_phone')}
                 error={Boolean(touched.user_phone && errors.user_phone)}
                 helperText={touched.user_phone && errors.user_phone}
@@ -140,7 +169,7 @@ export default function RegisterForm() {
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>             
               <TextField
                 fullWidth
-                label="백신접종 여부"
+                label="백신접종 여부 (Y/N)"
                 {...getFieldProps('user_vaccinated')}
                 error={Boolean(touched.user_vaccinated && errors.user_vaccinated)}
                 helperText={touched.user_vaccinated && errors.user_vaccinated}
@@ -148,7 +177,7 @@ export default function RegisterForm() {
   
               <TextField
                 fullWidth
-                label="접종하신 백신 종류"
+                label="접종 백신 종류"
                 {...getFieldProps('vaccine_type')}
                 error={Boolean(touched.vaccine_type && errors.vaccine_type)}
                 helperText={touched.vaccine_type && errors.vaccine_type}
@@ -159,12 +188,12 @@ export default function RegisterForm() {
               size="large"
               type="submit"
               variant="contained"
-              loading={isSubmitting}
-            >
-              가입 신청
+              loading={isSubmitting}>
+              회원 가입
             </LoadingButton>
         </Stack>
       </Form>
     </FormikProvider>
+    </div>
   );
 }

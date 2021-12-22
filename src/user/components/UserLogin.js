@@ -1,65 +1,65 @@
-import React, { useState } from 'react';
-import { Link as RouterLink, useNavigate  } from 'react-router-dom';
+import React, {useState} from 'react';
+import * as Yup from 'yup';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
-import * as Yup from 'yup';
-import {} from 'formik'
 import {
-    Link,
-    Stack,
-    Checkbox,
-    TextField,
-    IconButton,
-    InputAdornment,
-    FormControlLabel
-  } from '@mui/material';
+  Link,
+  Stack,
+  Checkbox,
+  TextField,
+  IconButton,
+  InputAdornment,
+  FormControlLabel
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import UserLost from './UserLost';
-import UserJoin from 'user';
-import Navigation from 'common/Navigation';
+// import Navigation from 'common/Navigation';
+import { UserLost, UserPage } from 'user';
 
-export default function UserLogin() {
-    const navigate = useNavigate();
-    const [showPassword, setShowPassword] = useState(false);
-    const {user_email, password} = `login`
+export default function LoginForm() {
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
-    const LoginSchema = Yup.object().shape({
-        user_email: Yup.string().user_email('메일주소 형식에 맞게 입력해주세요').required('메일 주소를 입력해주세요'),
-        password: Yup.string().required('비밀번호를 입력해주세요')
-    })
-    const formik = useFormik({
-        initialValues: {
-            user_email: "",
-            password:"",
-            remember: true
-        },
-        validationSchema: LoginSchema,
-        onSubmit: () =>{
-            navigate('/{Navigation}', {replace: true});            
-        }
-    })
-    const {errors, touched, values, isSubmitting, handleSubmit, getFieldProps}=formik;
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string().email().required('*필수 항목'),
+    password: Yup.string().required('*필수 항목')
+  });
 
-    const handleShowPassword=()=>{
-        setShowPassword((show)=>!show);
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      remember: true
+    },
+    validationSchema: LoginSchema,
+    onSubmit: () => {
+      navigate({UserPage}, { replace: true });
     }
+  });
 
-    return(
-        <FormikProvider value={formik}>
+  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+
+  const handleShowPassword = () => {
+    setShowPassword((show) => !show);
+  };
+
+  return (
+    <div align="center" style={{ display: "inline-block" }}>
+      <h1><b>로그인</b></h1>
+    <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <TextField
             fullWidth
-            autoComplete="email"
-            type="user_email"
-            label="메일 주소"
-            {...getFieldProps('user_email')}
-            error={Boolean(touched.user_email && errors.user_email)}
-            helperText={touched.user_email && errors.user_email}
+            autoComplete="user_email"
+            type="email"
+            label="이메일"
+            {...getFieldProps('email')}
+            error={Boolean(touched.email && errors.email)}
+            helperText={touched.email && errors.email}
           />
-
           <TextField
             fullWidth
             autoComplete="current-password"
@@ -86,9 +86,7 @@ export default function UserLogin() {
             label="로그인 상태 유지"
           />
 
-          <Link component={UserLost} variant="subtitle2" to="#">
-            비밀번호 찾기
-          </Link>
+          <a href="lost">비밀번호 찾기</a>
         </Stack>
 
         <LoadingButton
@@ -96,12 +94,12 @@ export default function UserLogin() {
           size="large"
           type="submit"
           variant="contained"
-          loading={isSubmitting}
-        >
+          loading={isSubmitting}>
           로그인
         </LoadingButton>
       </Form>
     </FormikProvider>
-    )
-
+    </div>
+  );
 }
+
