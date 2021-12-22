@@ -23,12 +23,13 @@ export default function UserLost(){
     const [showPassword, setShowPassword] = useState(false);
     const LostSchema = Yup.object().shape({
         user_email: Yup.string().email().required('*필수 항목'),
-        user_phone: Yup.string().required('*필수 항목')
+        // user_phone: Yup.string().required('*필수 항목')
+        // because user/views.py searches by user_email only
       });
     const formik = useFormik({
         initialValues: {
-            user_email: '',           
-            user_phone:'',
+            user_email: ''           
+            // user_phone:'',
     },
     validationSchema: LostSchema,
     onSubmit: () => {
@@ -39,7 +40,7 @@ export default function UserLost(){
 
     return(
         <div align="center" style={{ display: "inline-block" }}>
-            <h2>PW 찾기</h2>
+                <h2>PW 찾기</h2>
             <FormikProvider value={formik}>
                 <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                     <Stack spacing={3}>
@@ -49,16 +50,16 @@ export default function UserLost(){
                             type="email"
                             label="이메일"
                             {...getFieldProps('email')}
-                            error={Boolean(touched.email && errors.email)}
-                            helperText={touched.email && errors.email}
+                            error={Boolean(touched.user_email && errors.user_email)}
+                            helperText={touched.user_email && errors.user_email}
                         />
-                        <TextField
+                        {/* <TextField
                             fullWidth
                             label="연락처"
                             {...getFieldProps('user_phone')}
                             error={Boolean(touched.user_phone && errors.user_phone)}
                             helperText={touched.user_phone && errors.user_phone}
-                        />                                           
+                        />*/}
                         <LoadingButton
                             fullWidth
                             size="large"

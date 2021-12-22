@@ -43,6 +43,7 @@ const useStyles = makeStyles({
 export default function MedptTable(){
     const classes = useStyles();
     return (
+        <div align="center" style={{ display: "inline-block" }}>
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
                 <TableHead>
@@ -70,7 +71,7 @@ export default function MedptTable(){
                     ))}
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainer></div>
     );
 }
 

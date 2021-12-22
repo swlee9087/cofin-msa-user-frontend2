@@ -8,11 +8,11 @@ news >> keyword crawl
 
 ###<<UI>>
 loginpg FIN
-user X
+user ?? leave as is, or change?
 join FIN
 login FIN
 lost FIN
-userinfo X
+userinfo NE
 unregis NE
 
 ####12/22

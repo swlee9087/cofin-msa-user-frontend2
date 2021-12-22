@@ -86,7 +86,7 @@ export default function LoginForm() {
             label="로그인 상태 유지"
           />
 
-          <a href="lost">비밀번호 찾기</a>
+          <a href="lost"><small>비밀번호 찾기</small></a>
         </Stack>
 
         <LoadingButton

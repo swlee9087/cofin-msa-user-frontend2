@@ -1,3 +1,4 @@
+import React from 'react';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
@@ -8,27 +9,52 @@ import { useNavigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router';
 // material
 import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { Button } from '@mui/material';
+import UserJoin from 'user/templates/222';
 
 
 export default function RegisterForm() {
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate('/');
-  //     console.log(user);
-  //   }
-  // }, [navigate, user]);
 
   const [showPassword, setShowPassword] = useState(false);
+  const [user, setUser] = useState({
+    user_email: '',
+    username:'',
+    password: '',
+    user_name: '',
+    user_birthday: '',
+    user_sex:'',
+    user_phone:'',
+    user_address:'',
+    user_vaccinated:'',
+    vaccine_type:''
+  })
+  const handleChange = e => {
+    const {name, value} = e.target
+    setUser({
+      ...user,
+      [name]:value
+    })
+    console.log(e.target.name);
+    console.log(setUser);
+  }
 
-  const SERVER='http://127.0.0.1:8000/api/user/join'
+  const handleSubmit=e=>{
+    e.preventDefault();
+    console.log(`가입 : ${JSON.stringify(user)}`)
+    userRegister({user})
+    .then(res=>{alert(`가입 완료: ${res.data.result}`)})
+    .catch(err=>{alert(`가입 실패: ${err}`)})
+  }
+
+  // const userJoin=joinRequest=>axios.post(`${SERVER}/??`, JSON.stringify(joinRequest),{headers})
+  
+//   const SERVER='http://127.0.0.1:8000/api/user/join'
+// // ????
 
   const{user_email, username, password, 
     user_name, user_birthday, user_sex, user_phone, 
     user_address, user_vaccinated, vaccine_type}='user'
-  
-  // const userJoin=joinRequest=>axios.post(`${SERVER}/??`, JSON.stringify(joinRequest),{headers})
   
 
   const RegisterSchema = Yup.object().shape({
@@ -47,15 +73,15 @@ export default function RegisterForm() {
   const formik = useFormik({
     initialValues: {
       user_email: '',
-        username:'',
-        password: '',
-        user_name: '',
-        user_birthday: '',
-        user_sex:'',
-        user_phone:'',
-        user_address:'',
-        user_vaccinated:'',
-        vaccine_type:''
+      username:'',
+      password: '',
+      user_name: '',
+      user_birthday: '',
+      user_sex:'',
+      user_phone:'',
+      user_address:'',
+      user_vaccinated:'',
+      vaccine_type:''
     },
     validationSchema: RegisterSchema,
     onSubmit: () => {
@@ -63,15 +89,7 @@ export default function RegisterForm() {
     }
   });
 
-  // const handleChange = e => {
-  //   console.log(e.target.name);
-  //   setSignup({ ...signup, [e.target.name]: e.target.value });
-  //   console.log(signup);
-  // };
-
-
-  
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { errors, touched, isSubmitting, getFieldProps } = formik;
 
   return (
     <div align="center" style={{ display: "inline-block" }}>
@@ -183,14 +201,14 @@ export default function RegisterForm() {
                 helperText={touched.vaccine_type && errors.vaccine_type}
               /></Stack>          
             
-            <LoadingButton
+            <Button variant="outlined"
               fullWidth
               size="large"
               type="submit"
               variant="contained"
               loading={isSubmitting}>
               회원 가입
-            </LoadingButton>
+            </Button>
         </Stack>
       </Form>
     </FormikProvider>
