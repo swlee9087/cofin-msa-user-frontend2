@@ -14,7 +14,7 @@ import {
   InputAdornment,
   FormControlLabel
 } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { Button } from '@mui/material';
 // import Navigation from 'common/Navigation';
 import { UserLost, UserPage } from 'user';
 
@@ -89,14 +89,18 @@ export default function LoginForm() {
           <a href="lost"><small>비밀번호 찾기</small></a>
         </Stack>
 
-        <LoadingButton
+        <Button
           fullWidth
           size="large"
           type="submit"
           variant="contained"
-          loading={isSubmitting}>
+          loading={isSubmitting}
+          onClick={()=>{
+            
+            console.log(`success`)
+        }}>
           로그인
-        </LoadingButton>
+        </Button>
       </Form>
     </FormikProvider>
     </div>

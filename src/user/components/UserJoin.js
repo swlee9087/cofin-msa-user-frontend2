@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 // material
 import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { Button } from '@mui/material';
-import UserJoin from 'user/templates/222';
 
 
 export default function RegisterForm() {
@@ -42,7 +41,7 @@ export default function RegisterForm() {
   const handleSubmit=e=>{
     e.preventDefault();
     console.log(`가입 : ${JSON.stringify(user)}`)
-    userRegister({user})
+    RegisterForm({user})
     .then(res=>{alert(`가입 완료: ${res.data.result}`)})
     .catch(err=>{alert(`가입 실패: ${err}`)})
   }
@@ -54,7 +53,7 @@ export default function RegisterForm() {
 
   const{user_email, username, password, 
     user_name, user_birthday, user_sex, user_phone, 
-    user_address, user_vaccinated, vaccine_type}='user'
+    user_address, user_vaccinated, vaccine_type}=`user`
   
 
   const RegisterSchema = Yup.object().shape({
@@ -63,11 +62,11 @@ export default function RegisterForm() {
     passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null], '비밀번호가 일치하지 않습니다'),
     username: Yup.string().required('아이디 6 ~ 12자 이내로 작성해주세요').min(6, '6 ~ 12자 이내로 작성해주세요'),
     user_birthday: Yup.string().required('생년월일 8자리 입력해주세요').min(8),
-    user_sex: Yup.string().required(),
+    user_sex: Yup.string().required('m / f'),
     user_phone: Yup.string().required('연락처 11자리 입력해주세요'),
     user_address: Yup.string().required(),
-    user_vaccinated: Yup.string().required('백신 접종완료 여부를 알려주세요'),
-    vaccine_type: Yup.string()        
+    user_vaccinated: Yup.string().required('yes/ no 백신 접종완료 여부를 알려주세요'),
+    vaccine_type: Yup.string('대중적인 명칭으로 기입해주세요').max(30)        
     });
 
   const formik = useFormik({
@@ -153,7 +152,7 @@ export default function RegisterForm() {
               autoComplete="current-password"
               type={showPassword ? 'text' : 'password'}
               label="비밀번호 확인"
-              {...getFieldProps('password')}
+              {...getFieldProps('password')}  // how to make pw chk?
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -171,7 +170,7 @@ export default function RegisterForm() {
               
               <TextField
                 fullWidth
-                label="010-0000-0000"
+                label="01000000000"
                 {...getFieldProps('user_phone')}
                 error={Boolean(touched.user_phone && errors.user_phone)}
                 helperText={touched.user_phone && errors.user_phone}
@@ -206,7 +205,10 @@ export default function RegisterForm() {
               size="large"
               type="submit"
               variant="contained"
-              loading={isSubmitting}>
+              loading={isSubmitting}
+              onClick={()=>{
+                console.log('가입 완료.')
+            }}>
               회원 가입
             </Button>
         </Stack>
