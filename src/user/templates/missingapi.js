@@ -14,7 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch } from "react-redux";
 import { addUserAction } from "reducers/user.reducer";
-import { userRegister } from 'api';
+import { UserJoin } from 'user';
 
 const theme = createTheme();
 
@@ -38,7 +38,7 @@ export default function UserJoin() {
     const handleSubmit = e => {
         e.preventDefault();
         alert(`가입 회원정보: ${JSON.stringify(user)}`)
-        userRegister({user})
+        UserJoin({user})
         .then(res => {alert(`가입 완료: ${res.data.result}`)})
         .catch(err => {alert(`가입 실패: ${err}`)})
         

@@ -17,13 +17,13 @@ import {
   } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import UserLost from './UserLost';
+import UserJoin from 'user';
 import Navigation from 'common/Navigation';
 
 export default function UserLogin() {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
-    const [login, setLogin] = useState({})
-    const {user_email, password} = login
+    const {user_email, password} = `login`
 
     const LoginSchema = Yup.object().shape({
         user_email: Yup.string().user_email('메일주소 형식에 맞게 입력해주세요').required('메일 주소를 입력해주세요'),
