@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Yup from 'yup';
-import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useFormik, Form, FormikProvider } from 'formik';
 import eyeFill from '@iconify/icons-eva/eye-fill';
@@ -10,12 +9,12 @@ import { useNavigate } from 'react-router-dom';
 // material
 import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { Button } from '@mui/material';
+import axios from 'axios';
+
 
 
 export default function RegisterForm() {
   const navigate = useNavigate();
-
-  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState({
     user_email: '',
     username:'',
@@ -28,6 +27,8 @@ export default function RegisterForm() {
     user_vaccinated:'',
     vaccine_type:''
   })
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleChange = e => {
     const {name, value} = e.target
     setUser({

@@ -11,27 +11,24 @@ import {
     TableRow,
     Paper
   } from "@material-ui/core";
-// import "" from "backend/admin/message/data"
+import axios from 'axios';
 
-// function createData(id, col1, col2, col3, col4, col5){
-//     return{id, col1, col2, col3, col4, col5};
-// }
-// csv: 연,월,일,시,분,수신지역, 내용  NOPE
-// ERD: ++id, XX message_type(5), ++message_date, ++message_time(24H), message_city, message_district, 
-    //+msg_tags? +description? +msg! +landmark?
+// axios.get('/');
 
-function createData(id,date,time,city,district,msg){
-    return{id,date,time,city,district,msg};
+
+function createData(idx,date,time,location_id,location_name,msg_content){
+    // return{id,date,time,city,district,msg};
+    return{idx,date,time,location_id,location_name,msg_content};
 }
 
 const rows = [
-    createData(1,'2020-01-26','0909','서울시','중구','장충동 호텔 화재'),
-    createData(23,'2020-02-26','1517','서울시','노원구','보건소 선별진료소 정상 운영'),
-    createData(24,'2020-02-26','1629','서울시','강남구','확진자 공개 강남구 홈페이지'),
-    createData(66,'2020-03-01','1821','서울시','관악구','관악구 청룡동 확진자 발생'),
-    createData(619,'2020-04-24','2035','서울시','광진구','확진자 관내동선 조치완료'),
-    createData(1695,'2020-08-07','1114','서울시','동작구','동작구 노량진1동 확진자 발생'),
-    createData(3804,'2020-11-08','1853','서울시','용산구','용산구 확진자 발생'),
+    createData(1,'2020-01-26','15:14:08','97','경상북도 포항시','[포항시청]12.27 900번버스 구룡포시장정류장08:10→남구보건소정류장08:33 남구보건소정류장09:17→구룡포시장정류장09:42 탑승객은 보건소 검사바람'),
+    createData(1,'2020-01-26','15:14:08','97','경상북도 포항시','[포항시청]12.27 900번버스 구룡포시장정류장08:10→남구보건소정류장08:33 남구보건소정류장09:17→구룡포시장정류장09:42 탑승객은 보건소 검사바람'),
+    createData(1,'2020-01-26','15:14:08','97','경상북도 포항시','[포항시청]12.27 900번버스 구룡포시장정류장08:10→남구보건소정류장08:33 남구보건소정류장09:17→구룡포시장정류장09:42 탑승객은 보건소 검사바람'),
+    createData(1,'2020-01-26','15:14:08','97','경상북도 포항시','[포항시청]12.27 900번버스 구룡포시장정류장08:10→남구보건소정류장08:33 남구보건소정류장09:17→구룡포시장정류장09:42 탑승객은 보건소 검사바람'),
+    createData(1,'2020-01-26','15:14:08','97','경상북도 포항시','[포항시청]12.27 900번버스 구룡포시장정류장08:10→남구보건소정류장08:33 남구보건소정류장09:17→구룡포시장정류장09:42 탑승객은 보건소 검사바람'),
+    createData(1,'2020-01-26','15:14:08','97','경상북도 포항시','[포항시청]12.27 900번버스 구룡포시장정류장08:10→남구보건소정류장08:33 남구보건소정류장09:17→구룡포시장정류장09:42 탑승객은 보건소 검사바람'),
+    
 ];
 
 const useStyles = makeStyles({
@@ -40,7 +37,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function MedptTable(){
+export default function MsgTable(){
     const classes = useStyles();
     return (
         <div align="center" style={{ display: "inline-block" }}>
@@ -48,24 +45,24 @@ export default function MedptTable(){
             <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell onclick="sortColumn('id')">ID/ <code>message_id</code></StyledTableCell>
-                        <StyledTableCell onclick="sortColumn('date')">date/ <code>message_date</code></StyledTableCell>
-                        <StyledTableCell>time/ <code>message_time</code></StyledTableCell>
-                        <StyledTableCell>city/ <code>message_city</code></StyledTableCell>
-                        <StyledTableCell>district/ <code>message_district</code></StyledTableCell>
-                        <StyledTableCell>msg/ <code>message_</code></StyledTableCell>
-                        {/* <StyledTableCell>tag/ <code>message_tag</code></StyledTableCell> */}
+                        <StyledTableCell onclick="sortColumn('id')">ID/ <code>id</code></StyledTableCell>
+                        <StyledTableCell onclick="sortColumn('date')">date/ <code>date</code></StyledTableCell>
+                        <StyledTableCell onclick="sortColumn('time')">time/ <code>time</code></StyledTableCell>
+                        <StyledTableCell>location_id/ <code>location_id</code></StyledTableCell>
+                        <StyledTableCell>location_name/ <code>location_name</code></StyledTableCell>
+                        <StyledTableCell>msg_content/ <code>msg_content</code></StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row)=>(
                         <StyledTableRow key={row.id}>
-                            <StyledTableCell component ="th" scope="row">{row.id}</StyledTableCell>
+                            <StyledTableCell component ="th" scope="row">{row.id}</StyledTableCell>  
+                            {/* autoGen??  */}
                             <StyledTableCell align="center">{row.date}</StyledTableCell>
                             <StyledTableCell align="center">{row.time}</StyledTableCell>
-                            <StyledTableCell align="center">{row.city}</StyledTableCell>
-                            <StyledTableCell align="center">{row.district}</StyledTableCell>
-                            <StyledTableCell align="center">{row.msg}</StyledTableCell> 
+                            <StyledTableCell align="center">{row.location_id}</StyledTableCell>
+                            <StyledTableCell align="center">{row.location_name}</StyledTableCell>
+                            <StyledTableCell align="center">{row.msg_content}</StyledTableCell> 
                             {/* <StyledTableCell>tag/ <code>message_tag</code></StyledTableCell> */}
                         </StyledTableRow>
                     ))}

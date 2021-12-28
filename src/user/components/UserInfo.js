@@ -10,6 +10,10 @@ import { useNavigate } from 'react-router-dom';
 // material
 import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { Button } from '@mui/material';
+import axios from 'axios';
+
+
+// const axios = require('axios').default;
 
 export default function UserInfo(){
 
