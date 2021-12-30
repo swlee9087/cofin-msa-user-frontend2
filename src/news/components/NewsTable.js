@@ -41,7 +41,7 @@ export default function MedptTable(){
                         <StyledTableCell>index/ <code>id</code></StyledTableCell>
                         <StyledTableCell>title/ <code>title</code></StyledTableCell>
                         <StyledTableCell>url/ <code>url</code></StyledTableCell>
-                        <StyledTableCell>pubData/ <code>pubData</code></StyledTableCell>
+                        <StyledTableCell>pubDate/ <code>pubDate</code></StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -50,7 +50,7 @@ export default function MedptTable(){
                             <StyledTableCell component ="th" scope="row">{row.id}</StyledTableCell>
                             <StyledTableCell align="center">{row.title}</StyledTableCell>
                             <StyledTableCell align="center">{row.url}</StyledTableCell>
-                            <StyledTableCell align="center">{row.pubData}</StyledTableCell>        
+                            <StyledTableCell align="center">{row.pubDate}</StyledTableCell>        
                             
                         </StyledTableRow>
                     ))}
