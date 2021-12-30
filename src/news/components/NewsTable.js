@@ -10,36 +10,18 @@ import {
     Paper,
   } from "@material-ui/core";
 
-  const StyledTableCell = withStyles(theme => ({
-    head:{
-        backgroundColor: 'black', 
-        color: 'white',
-    },
-    body:{
-        fontSize: 14,
-    },
 
-}))(TableCell);
-
-const StyledTableRow = withStyles(theme=>({
-    row: {
-        '&:hover':{backgroundColor: 'rgba(33,150,243,0.5'}
-    }
-}))(TableRow);
-
-// function createData(id, col1, col2, col3, col4, col5){
-//     return{id, col1, col2, col3, col4, col5};
-// }
-// ERD: id, pubTime, pubDate, link, tag, publisher, reporter, type(4)
-
-function createData(id,city,district,medptName,address,phMedpt,opHrWeek,opHrSat,
-    opHrSunEtc,bogunso,phBogunso,notes){
-    return{id,city,district,medptName,address,phMedpt,opHrWeek,opHrSat,
-        opHrSunEtc,bogunso,phBogunso,notes};
+function createData(id,title,url,pubDate){
+    return{id,title,url,pubDate};
 }
 
 const rows = [
-    createData(1, '서울','강남구','강남구보건소','삼성2동 8','0000','0000','0000','0000','0000','0000','sunday X'),
+    createData(1, '전 세계 오미크론 급확산… 정부, 아프리카 11개국 입국금지 연장','https://m.news.naver.com/read?mode=LSD&mid=sec&sid1=102&oid=022&aid=0003652394','세계일보언론사 선정20시간 전'),
+    createData(2, '신규확진 5천37명, 이틀 연속 5천명대…위중증 1천145명(종합)','https://m.news.naver.com/read?mode=LSD&mid=sec&sid1=102&oid=001&aid=0012852705','연합뉴스언론사 선정38분 전'),
+    createData(1, '전 세계 오미크론 급확산… 정부, 아프리카 11개국 입국금지 연장','https://m.news.naver.com/read?mode=LSD&mid=sec&sid1=102&oid=022&aid=0003652394','세계일보언론사 선정20시간 전'),
+    createData(2, '신규확진 5천37명, 이틀 연속 5천명대…위중증 1천145명(종합)','https://m.news.naver.com/read?mode=LSD&mid=sec&sid1=102&oid=001&aid=0012852705','연합뉴스언론사 선정38분 전'),
+    createData(1, '전 세계 오미크론 급확산… 정부, 아프리카 11개국 입국금지 연장','https://m.news.naver.com/read?mode=LSD&mid=sec&sid1=102&oid=022&aid=0003652394','세계일보언론사 선정20시간 전'),
+    createData(2, '신규확진 5천37명, 이틀 연속 5천명대…위중증 1천145명(종합)','https://m.news.naver.com/read?mode=LSD&mid=sec&sid1=102&oid=001&aid=0012852705','연합뉴스언론사 선정38분 전'),
 ];
 
 const useStyles = makeStyles({
@@ -56,16 +38,19 @@ export default function MedptTable(){
             <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell>연변/ <code>medpt_id</code></StyledTableCell>
+                        <StyledTableCell>index/ <code>id</code></StyledTableCell>
+                        <StyledTableCell>title/ <code>title</code></StyledTableCell>
+                        <StyledTableCell>url/ <code>url</code></StyledTableCell>
+                        <StyledTableCell>pubData/ <code>pubData</code></StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row)=>(
                         <StyledTableRow key={row.id}>
-                            <StyledTableCell component ="th" scope="row">
-                                {row.id}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">{row.city}</StyledTableCell>
+                            <StyledTableCell component ="th" scope="row">{row.id}</StyledTableCell>
+                            <StyledTableCell align="center">{row.title}</StyledTableCell>
+                            <StyledTableCell align="center">{row.url}</StyledTableCell>
+                            <StyledTableCell align="center">{row.pubData}</StyledTableCell>        
                             
                         </StyledTableRow>
                     ))}
@@ -76,3 +61,19 @@ export default function MedptTable(){
     );
 }
 
+const StyledTableCell = withStyles(theme => ({
+    head:{
+        backgroundColor: 'black', 
+        color: 'white',
+    },
+    body:{
+        fontSize: 14,
+    },
+
+}))(TableCell);
+
+const StyledTableRow = withStyles(theme=>({
+    row: {
+        '&:hover':{backgroundColor: 'rgba(33,150,243,0.5'}
+    }
+}))(TableRow);
