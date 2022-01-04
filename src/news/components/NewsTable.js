@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function MedptTable(){
+export default function NewsTable(){
     const classes = useStyles();
     return (
         <div align="center" style={{ display: "inline-block" }}>

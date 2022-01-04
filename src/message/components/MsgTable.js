@@ -17,7 +17,6 @@ import axios from 'axios';
 
 
 function createData(idx,date,time,location_id,location_name,msg_content){
-    // return{id,date,time,city,district,msg};
     return{idx,date,time,location_id,location_name,msg_content};
 }
 
